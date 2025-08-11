@@ -17,7 +17,7 @@ I learned how **graph nodes**, **edges**, and **state** work together to form an
 ## 🎥 Project Demo Video  
 *(Click the image below to watch the demo video)*  
 
-[![Watch the demo](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://github.com/Premkumar9799817360/Chatbot_langGraph/blob/main/Video.mp4)  
+[![Watch the demo](https://github.com/Premkumar9799817360/Chatbot_langGraph/blob/main/Chatbot%20UI.jpg)](https://github.com/Premkumar9799817360/Chatbot_langGraph/blob/main/Video.mp4)  
 > Replace `VIDEO_ID` with your actual YouTube video ID after uploading.
 
 ---
@@ -71,6 +71,7 @@ I learned how **graph nodes**, **edges**, and **state** work together to form an
 
 ## 📷 Preview  
 *(Add screenshots of your chatbot UI here)*
+(https://github.com/Premkumar9799817360/Chatbot_langGraph/blob/main/Chatbot%20UI.jpg)
 
 ---
 
