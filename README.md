@@ -9,6 +9,19 @@ I learned how **graph nodes**, **edges**, and **state** work together to form an
 
 ---
 
+## 🌍 Live Demo  
+🚀 **Try the chatbot here:** [https://chatbotlanggraph-premkumar.streamlit.app/](https://chatbotlanggraph-premkumar.streamlit.app/)  
+
+---
+
+## 🎥 Project Demo Video  
+*(Click the image below to watch the demo video)*  
+
+[![Watch the demo](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://youtu.be/VIDEO_ID)  
+> Replace `VIDEO_ID` with your actual YouTube video ID after uploading.
+
+---
+
 ## 🎯 What I Learned  
 
 ### 🗂 **Graph Structure**
@@ -57,7 +70,7 @@ I learned how **graph nodes**, **edges**, and **state** work together to form an
 ---
 
 ## 📷 Preview  
-*(You can add screenshots of your chatbot UI here)*
+*(Add screenshots of your chatbot UI here)*
 
 ---
 
