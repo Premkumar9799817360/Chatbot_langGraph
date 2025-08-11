@@ -3,15 +3,70 @@ import time
 import markdown
 from langGraph import chatbot
 from langchain_core.messages import HumanMessage
+import uuid
+
+
+
+
+def generate_thread_id():
+    thread_id = uuid.uuid4()
+    return str(thread_id)
+
+
+def reset_chat():
+    thread_id = generate_thread_id()
+    st.session_state['thread_id'] = thread_id
+    add_thread_id(st.session_state['thread_id'])
+    st.session_state['memory_history'] = []
+
+def add_thread_id(thread_id):
+    if thread_id not in st.session_state['chat_threads']:
+        st.session_state['chat_threads'].append(thread_id)
+
+def load_conversation(thread_id):
+    state = chatbot.get_state(config={'configurable': {'thread_id': thread_id}})
+    state_val = state.values
+    messages = state_val.get('messages', [])
+    return messages
+
 
 # Page configuration
 st.set_page_config(page_title="LangGraph Chatbot", page_icon="🤖", layout="wide")
 
-CONFIG = {'configurable': {'thread_id': 'thread-1'}}
 
 # Session state for memory
 if "memory_history" not in st.session_state:
     st.session_state.memory_history = []
+
+if "thread_id" not in st.session_state:
+    st.session_state['thread_id'] = generate_thread_id()
+
+if "chat_threads" not in st.session_state:
+    st.session_state['chat_threads'] = []
+
+add_thread_id(st.session_state['thread_id'])
+
+
+CONFIG = {'configurable': {'thread_id': st.session_state['thread_id']}}
+
+st.sidebar.title("LangGraph Chatbot")
+if st.sidebar.button("New Chat"):
+    reset_chat()
+
+st.sidebar.header("My Conversations")
+for thread_id in st.session_state['chat_threads']:
+    if st.sidebar.button(str(thread_id)):
+        st.session_state['thread_id'] = thread_id
+        messages = load_conversation(thread_id)
+
+        temp_messages = []
+        for message in messages:
+            if isinstance(message, HumanMessage):
+                role = "user"
+            else:   
+                role = "assistant"
+            temp_messages.append({"role": role, "content": message.content})
+        st.session_state.memory_history = temp_messages
 
 # Chat bubble styles
 st.markdown("""
@@ -85,6 +140,20 @@ if user_input:
         typing_placeholder.markdown(f'<div class="assistant-bubble">{rendered_typing}</div>', unsafe_allow_html=True)
         time.sleep(0.02)
 
+
+
+   # this code for straming response
+
+    # ai_response = st.write_stream(
+    #         message_chunk.content for message_chunk, metadata in chatbot.stream(
+    #             {'messages': [HumanMessage(content=user_input)]},
+    #             config= {'configurable': {'thread_id': 'thread-1'}},
+    #             stream_mode= 'messages'
+    #         )
+    #     )
+    # typing_placeholder = st.empty()
+    # rendered_typing = markdown.markdown(ai_response)
+    # typing_placeholder.markdown(f'<div class="assistant-bubble">{rendered_typing}</div>', unsafe_allow_html=True)
     # 3️⃣ Save AI response to memory
     st.session_state.memory_history.append({"role": "assistant", "content": ai_response})
 
